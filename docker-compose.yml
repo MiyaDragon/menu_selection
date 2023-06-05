@@ -52,6 +52,12 @@ services:
                 - '-p${DB_PASSWORD}'
             retries: 3
             timeout: 5s
+    adminer:
+        image: adminer:4.7
+        ports:
+            - 8080:8080
+        depends_on:
+            - mysql
     redis:
         image: 'redis:alpine'
         ports:
