@@ -1,8 +1,9 @@
 {
   "Name": "名前",
+  "NickName": "ニックネーム",
   "Log in": "ログイン",
   "Password": "パスワード",
-  "Confirm Password": "パスワードの確認",
+  "Confirm Password": "パスワード（確認）",
   "Email": "メールアドレス",
   "Forgot your password?": "パスワードをお忘れですか？",
   "Remember me": "パスワードを保存する",
