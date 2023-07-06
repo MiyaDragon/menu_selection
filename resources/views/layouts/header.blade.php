@@ -1,5 +1,5 @@
 <!-- Page Heading -->
-<nav class="bg-orange-300 border-gray-200">
+<nav class="bg-orange-300 border-gray-200 sticky top-0 z-50">
 
   <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
 
