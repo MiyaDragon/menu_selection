@@ -12,7 +12,7 @@
                         </header>
 
                         <div class="p-4 sm:p-8">
-                            <x-input-label for="nickname" :value="__('ニックネーム')" />
+                            <x-input-label for="nickname" :value="__('ニックネーム')" :required=false />
                             <div class="flex">
                                 <p class="flex-auto">{{ $user->nickname }}</p>
                                 <a href="{{ route('account.nickname.edit') }}" class="flex-auto"><small>変更 ></small></a>
@@ -20,7 +20,7 @@
                         </div>
 
                         <div class="p-4 sm:p-8">
-                            <x-input-label for="email" :value="__('メールアドレス')" />
+                            <x-input-label for="email" :value="__('メールアドレス')" :required=false />
                             <div class="flex">
                                 <p class="flex-auto">{{ $user->email }}</p>
                                 <a href="{{ route('account.email.edit') }}" class="flex-auto"><small>変更 ></small></a>
@@ -28,7 +28,7 @@
                         </div>
 
                         <div class="p-4 sm:p-8">
-                            <x-input-label for="password" :value="__('パスワード')" />
+                            <x-input-label for="password" :value="__('パスワード')" :required=false />
                             <div class="flex">
                                 <p class="flex-auto">********</p>
                                 <a href="{{ route('account.password.edit') }}" class="flex-auto"><small>変更 ></small></a>
