@@ -320,6 +320,11 @@ return [
         ],
         ['header' => 'account_settings'],
         [
+            'text' => '管理者管理',
+            'url'  => 'admin/admin_users',
+            'icon' => 'fas fa-fw fa-user',
+        ],
+        [
             'text' => 'profile',
             'url'  => 'admin/settings',
             'icon' => 'fas fa-fw fa-user',
