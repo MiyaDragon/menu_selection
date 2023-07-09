@@ -69,4 +69,22 @@ class AccountTest extends TestCase
         $this->assertSame('update@update.com', $user->email);
         $this->assertNull($user->email_verified_at);
     }
+
+    public function test_user_can_delete_their_account(): void
+    {
+        $user = User::factory()->create();
+
+        $response = $this
+            ->actingAs($user)
+            ->delete('/account/withdrawal', [
+                'withdrawal_reason' => '特になし',
+            ]);
+
+        $response
+            ->assertSessionHasNoErrors()
+            ->assertRedirect('/');
+
+        $this->assertGuest();
+        $this->assertSoftDeleted($user->fresh());
+    }
 }
