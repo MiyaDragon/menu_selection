@@ -22,6 +22,7 @@ class User extends Authenticatable
         'nickname',
         'email',
         'password',
+        'withdrawal_reason',
     ];
 
     /**

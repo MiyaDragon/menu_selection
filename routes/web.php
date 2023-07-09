@@ -53,3 +53,11 @@ Route::prefix('account')->name('account.')->middleware(['auth'])->group(function
 });
 
 require __DIR__ . '/auth.php';
+
+Route::prefix('admin')->name('admin.')->group(function () {
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->middleware(['auth:admin', 'verified'])->name('dashboard');
+
+    require __DIR__ . '/admin.php';
+});
