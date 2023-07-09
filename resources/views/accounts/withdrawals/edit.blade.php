@@ -1,28 +1,31 @@
 <x-app-layout>
 
-    <div class="py-12">
-        <div class="sm:px-6 lg:px-8 space-y-6">
-            <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
-                <div class="max-w-xl">
-                    <section>
-                        <header>
-                            <h2 class="text-lg font-medium text-gray-900">
-                                退会手続き
-                            </h2>
-                        </header>
+    <form method="post" action="{{ route('account.withdrawal.destroy') }}">
+        @csrf
+        @method('delete')
 
-                        <div class="p-4 sm:p-8">
-                            <x-input-label for="password" :value="__('退会理由')" />
-                            <x-text-input id="password" type="text" name="password" required autofocus autocomplete="password" />
-                            <x-input-error :messages="$errors->get('password')" class="mt-2" />
-                            <button type="button" class="w-1/3 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mt-3" onClick="history.back();">キャンセル</button>
-                            <button type="submit" class="w-1/3 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mt-3">退会する</button>
-                            </div>
+        <div class="py-12">
+            <div class="sm:px-6 lg:px-8 space-y-6">
+                <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
+                    <div class="max-w-xl">
+                        <section>
+                            <header>
+                                <h2 class="text-lg font-medium text-gray-900">
+                                    退会手続き
+                                </h2>
+                            </header>
 
-                    </section>
+                            <div class="p-4 sm:p-8">
+                                <x-input-label for="withdrawal_reason" :value="__('退会理由')" :required="false" />
+                                <textarea id="withdrawal_reason" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-orange-300 focus:border-orange-300"></textarea>
+                                <x-input-error :messages="$errors->get('withdrawal_reason')" class="mt-2" />
+                                <x-cancel-button>キャンセル</x-cancel-button>
+                                <x-submit-button>退会する</x-submit-button>
+                        </section>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    </form>
 
 </x-app-layout>

@@ -32,7 +32,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::prefix('account')->name('account.')->middleware('auth')->group(function () {
+Route::prefix('account')->name('account.')->middleware(['auth'])->group(function () {
     Route::get('/', UserController::class)->name('show');
     Route::prefix('nickname')->name('nickname.')->controller(NickNameController::class)->group(function () {
         Route::get('/', 'edit')->name('edit');

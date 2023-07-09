@@ -16,7 +16,7 @@
                             </header>
 
                             <div class="p-4 sm:p-8">
-                                <x-input-label for="nickname" :value="__('ニックネーム')" :required=false/>
+                                <x-input-label for="nickname" :value="__('NickName')" :required=false/>
                                 <x-text-input id="nickname" type="text" name="nickname" :value="old('nickname', $user->nickname)" required autofocus autocomplete="nickname" />
                                 <x-input-error :messages="$errors->get('nickname')" class="mt-2" />
                                 <x-cancel-button>キャンセル</x-cancel-button>
