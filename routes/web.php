@@ -6,6 +6,7 @@ use App\Http\Controllers\Account\NickNameController;
 use App\Http\Controllers\Account\PasswordController;
 use App\Http\Controllers\Account\WithDrawalController;
 use App\Http\Controllers\Admin\AdminUserController;
+use App\Http\Controllers\Admin\UserController as ControllersAdminUserController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -60,7 +61,10 @@ Route::prefix('admin')->name('admin.')->group(function () {
         return view('admin.dashboard');
     })->middleware(['auth:admin', 'verified'])->name('dashboard');
 
-    Route::resource('admin_users', AdminUserController::class)->except('show');
+    Route::middleware(['auth:admin', 'verified'])->group(function () {
+        Route::resource('admin_users', AdminUserController::class)->except('show');
+        Route::resource('users', ControllersAdminUserController::class)->except('show');
+    });
 
     require __DIR__ . '/admin.php';
 });
