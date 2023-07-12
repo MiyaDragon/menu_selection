@@ -3,34 +3,34 @@
 namespace Tests\Feature\Admin;
 
 use App\Models\AdminUser;
-use App\Providers\RouteServiceProvider;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
-class AdminUserTest extends TestCase
+class UserTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_admin_users_index_screen_can_be_rendered(): void
+    public function test_users_index_screen_can_be_rendered(): void
     {
         $admin_user = AdminUser::factory()->create();
 
         $response = $this
             ->actingAs($admin_user, 'admin')
-            ->get('/admin/admin_users');
+            ->get('/admin/users');
 
         $response->assertStatus(200);
     }
 
-    public function test_new_admin_users_can_register(): void
+    public function test_new_users_can_register(): void
     {
         $admin_user = AdminUser::factory()->create();
 
         $response = $this
             ->actingAs($admin_user, 'admin')
-            ->post('/admin/admin_users', [
-                'name' => 'Test User',
+            ->post('/admin/users', [
+                'nickname' => 'Test User',
                 'email' => 'test@example.com',
                 'password' => 'password',
                 'password_confirmation' => 'password',
@@ -38,17 +38,18 @@ class AdminUserTest extends TestCase
 
         $response
             ->assertSessionHasNoErrors()
-            ->assertRedirect('/admin/admin_users');
+            ->assertRedirect('/admin/users');
     }
 
-    public function test_admin_users_can_be_updated(): void
+    public function test_users_can_be_updated(): void
     {
+        $user = User::factory()->create();
         $admin_user = AdminUser::factory()->create();
 
         $response = $this
             ->actingAs($admin_user, 'admin')
-            ->put("/admin/admin_users/{$admin_user->id}", [
-                'name' => 'Update User',
+            ->put("/admin/users/{$user->id}", [
+                'nickname' => 'Update User',
                 'email' => 'update@example.com',
                 'password' => 'password',
                 'password_confirmation' => 'password',
@@ -56,26 +57,27 @@ class AdminUserTest extends TestCase
 
         $response
             ->assertSessionHasNoErrors()
-            ->assertRedirect('/admin/admin_users');
+            ->assertRedirect('/admin/users');
 
-        $admin_user->refresh();
+        $user->refresh();
 
-        $this->assertSame('Update User', $admin_user->name);
-        $this->assertSame('update@example.com', $admin_user->email);
+        $this->assertSame('Update User', $user->nickname);
+        $this->assertSame('update@example.com', $user->email);
     }
 
     public function test_admin_user_can_delete_their_account(): void
     {
+        $user = User::factory()->create();
         $admin_user = AdminUser::factory()->create();
 
         $response = $this
             ->actingAs($admin_user, 'admin')
-            ->delete("/admin/admin_users/{$admin_user->id}");
+            ->delete("/admin/users/{$user->id}");
 
         $response
             ->assertSessionHasNoErrors()
-            ->assertRedirect('/admin/admin_users');
+            ->assertRedirect('/admin/users');
 
-        $this->assertSoftDeleted($admin_user->fresh());
+        $this->assertSoftDeleted($user->fresh());
     }
 }
